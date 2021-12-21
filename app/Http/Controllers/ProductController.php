@@ -9,7 +9,16 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::paginate(10);
+        $products = Product::orderByDesc("created_at")->paginate(10);
+        return response()->json([
+            "status" => 200,
+            "message" => $products,
+        ]);
+    }
+
+    public function specific($numbers)
+    {
+        $products = Product::all()->random($numbers);
         return response()->json([
             "status" => 200,
             "message" => $products,

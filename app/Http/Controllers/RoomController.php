@@ -14,76 +14,38 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $rooms = Room::paginate(10);
+        $rooms = Room::orderByDesc("created_at")->paginate(10);
         return response()->json([
             "status" => 200,
             "message" => $rooms,
         ]);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function room($roomid)
     {
-        //
+        $room = Room::where("id", $roomid)->first();
+        return response()->json([
+            "status" => 200,
+            "message" => $room,
+        ]);
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function specific($numberRooms)
     {
-        //
+        $rooms = Room::all()->random($numberRooms);
+        return response()->json([
+            "status" => 200,
+            "message" => $rooms,
+        ]);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
+    public function getProductsOfRoom($room_id)
     {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $room = Room::findOrFail($room_id);
+        return response()->json([
+            "status" => 200,
+            "message" => $room->products,
+        ]);
     }
 }
