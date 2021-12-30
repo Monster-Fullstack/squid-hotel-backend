@@ -5,17 +5,6 @@ use App\Http\Controllers\RoomController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
-
 // rooms routes
 Route::get("rooms", [RoomController::class, "index"]);
 Route::get("rooms/{id}", [RoomController::class, "room"]);
@@ -25,6 +14,8 @@ Route::get("rooms/products/{room_id}", [RoomController::class, "getProductsOfRoo
 // products routes
 Route::get("products", [ProductController::class, "index"]);
 Route::get("products/all/{numberProducts}", [ProductController::class, "specific"]);
+Route::get("products/{id}", [ProductController::class, "product"]);
+
 
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {

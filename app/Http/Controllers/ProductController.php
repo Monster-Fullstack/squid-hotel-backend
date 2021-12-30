@@ -16,6 +16,15 @@ class ProductController extends Controller
         ]);
     }
 
+    public function product($product_id)
+    {
+        $product = Product::where("id", $product_id)->first();
+        return response()->json([
+            "status" => 200,
+            "message" => $product,
+        ]);
+    }
+
     public function specific($numbers)
     {
         $products = Product::all()->random($numbers);
