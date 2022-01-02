@@ -18,6 +18,7 @@ class CreateRoomsTable extends Migration
             $table->string("name");
             $table->text("description");
             $table->string("horror");
+            $table->float("rate");
             $table->string("allowed_type");
             $table->string("photo");
             $table->timestamps();
